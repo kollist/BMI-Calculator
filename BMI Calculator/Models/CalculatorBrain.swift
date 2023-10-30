@@ -11,26 +11,28 @@ import UIKit
 
 
 struct CalculatorBrain {
-    var height: Float
-    var weight: Float
-    var BMI: BMI?
+    var bmi : BMI?
 
-    init(height: Float, weight: Float) {
-        self.height = height
-        self.weight = weight
-    }
-
-    mutating func calculateBMI() {
+    mutating func calculateBMI(height: Float, weight: Float) {
         let bmiValue = Double(weight / (height * height))
-        let bodyType = (bmiValue < 18.5) ? "Underweight" : (bmiValue > 24.9 ? "Overweight" : "Normal")
-        BMI = BMI_Calculator.BMI(value: bmiValue, advice: bodyType, color: UIColor.white)
+
+                if bmiValue < 18.5 {
+                    bmi = BMI(value: bmiValue, advice: "Eat more pies!", color: .yellow)
+                } else if bmiValue < 24.9 {
+                    bmi = BMI(value: bmiValue, advice: "Fit as a fiddle!", color: .cyan)
+                } else {
+                    bmi = BMI(value: bmiValue, advice: "Eat less pies!", color: .red)
+                }
     }
 
     func BMIValue() -> String {
-        return String(format: "%.2f", BMI?.value ?? 0.0)
+        return String(format: "%.2f", bmi?.value ?? 0.0)
     }
 
-    func advice() -> String {
-        return BMI!.advice
+    func getAdvice() -> String {
+        return bmi?.advice ?? "No Advice"
+    }
+    func getColor() -> UIColor {
+        return bmi?.color ?? .white
     }
 }

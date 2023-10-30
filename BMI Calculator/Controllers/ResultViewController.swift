@@ -10,17 +10,19 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
-    var BMIValue: String!
-    var Advice: String!
-
+    var bmiValue: String?
+    var advice: String?
+    var color: UIColor?
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var adviceLabel: UILabel!
+    @IBOutlet weak var ImageLabel: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        resultLabel.text = BMIValue
-        adviceLabel.text = Advice
-        
-        // Do any additional setup after loading the view.
+        resultLabel.text = bmiValue
+        adviceLabel.text = advice
+        ImageLabel.backgroundColor = color
     }
     @IBAction func recalculatePressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
